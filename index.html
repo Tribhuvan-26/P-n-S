@@ -9,10 +9,32 @@
   body { font-family: system-ui, sans-serif; margin: 0; padding: 2rem; background: #0b0d12; color: #e6e8eb; }
   h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
   p.meta { color: #9aa1ab; margin-top: 0; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #1f232c; vertical-align: top; }
+  th { color: #9aa1ab; font-weight: 600; position: sticky; top: 0; background: #0b0d12; }
+  tr:hover td { background: #12151c; }
+  a { color: #7aa2ff; }
+  .empty { color: #9aa1ab; }
+  .wrap { overflow-x: auto; }
 </style>
 </head>
 <body>
   <h1>P&amp;S Sponsor Leads</h1>
   <p class="meta" id="meta">Loading…</p>
+  <div class="wrap">
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Sponsor Company</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>LinkedIn</th>
+          <th>Event / Source</th>
+          <th>Date Found</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
 </body>
 </html>
