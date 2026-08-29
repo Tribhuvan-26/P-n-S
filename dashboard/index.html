@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P&S Sponsor Leads</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 2rem; background: #0b0d12; color: #e6e8eb; }
+  h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+  p.meta { color: #9aa1ab; margin-top: 0; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #1f232c; vertical-align: top; }
+  th { color: #9aa1ab; font-weight: 600; position: sticky; top: 0; background: #0b0d12; }
+  tr:hover td { background: #12151c; }
+  a { color: #7aa2ff; }
+  .empty { color: #9aa1ab; }
+  .wrap { overflow-x: auto; }
+  input[type=search] {
+    width: 100%; max-width: 320px; padding: 0.5rem 0.75rem; margin-bottom: 1rem;
+    border-radius: 8px; border: 1px solid #2a2f3a; background: #12151c; color: inherit;
+  }
+</style>
+</head>
+<body>
+  <h1>P&amp;S Sponsor Leads</h1>
+  <p class="meta" id="meta">Loading…</p>
+  <input type="search" id="search" placeholder="Filter by company, event, email…">
+  <div class="wrap">
+    <table id="table">
+      <thead>
+        <tr>
+          <th>Sponsor Company</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>LinkedIn</th>
+          <th>Event / Source</th>
+          <th>Date Found</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let allRows = [];
+
+    function link(url, label) {
+      if (!url) return '<span class="empty">—</span>';
+      return `<a href="${url}" target="_blank" rel="noopener">${label || url}</a>`;
+    }
+
+    function render(rows) {
+      const tbody = document.getElementById('rows');
+      tbody.innerHTML = rows.map(r => `
+        <tr>
+          <td>${r['Sponsor Company'] || ''}</td>
+          <td>${r['Email'] || '<span class="empty">—</span>'}</td>
+          <td>${r['Phone'] || '<span class="empty">—</span>'}</td>
+          <td>${link(r['LinkedIn URL'], 'Profile')}</td>
+          <td>${link(r['Source URL'], new URL(r['Source URL'] || 'https://example.com').hostname)}</td>
+          <td>${r['Date Found'] || ''}</td>
+        </tr>
+      `).join('') || `<tr><td colspan="6" class="empty">No rows yet.</td></tr>`;
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      render(allRows.filter(r => JSON.stringify(r).toLowerCase().includes(q)));
+    });
+
+    fetch('sponsors.json')
+      .then(r => r.json())
+      .then(rows => {
+        allRows = rows;
+        document.getElementById('meta').textContent = `${rows.length} lead(s)`;
+        render(rows);
+      })
+      .catch(() => {
+        document.getElementById('meta').textContent = 'Could not load sponsors.json';
+      });
+  </script>
+</body>
+</html>
