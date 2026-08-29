@@ -68,6 +68,17 @@
       const q = e.target.value.toLowerCase();
       render(allRows.filter(r => JSON.stringify(r).toLowerCase().includes(q)));
     });
+
+    fetch('sponsors.json')
+      .then(r => r.json())
+      .then(rows => {
+        allRows = rows;
+        document.getElementById('meta').textContent = `${rows.length} lead(s)`;
+        render(rows);
+      })
+      .catch(() => {
+        document.getElementById('meta').textContent = 'Could not load sponsors.json';
+      });
   </script>
 </body>
 </html>
