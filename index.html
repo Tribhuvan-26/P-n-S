@@ -63,6 +63,11 @@
         </tr>
       `).join('') || `<tr><td colspan="6" class="empty">No rows yet.</td></tr>`;
     }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      render(allRows.filter(r => JSON.stringify(r).toLowerCase().includes(q)));
+    });
   </script>
 </body>
 </html>
