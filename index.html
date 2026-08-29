@@ -16,11 +16,16 @@
   a { color: #7aa2ff; }
   .empty { color: #9aa1ab; }
   .wrap { overflow-x: auto; }
+  input[type=search] {
+    width: 100%; max-width: 320px; padding: 0.5rem 0.75rem; margin-bottom: 1rem;
+    border-radius: 8px; border: 1px solid #2a2f3a; background: #12151c; color: inherit;
+  }
 </style>
 </head>
 <body>
   <h1>P&amp;S Sponsor Leads</h1>
   <p class="meta" id="meta">Loading…</p>
+  <input type="search" id="search" placeholder="Filter by company, event, email…">
   <div class="wrap">
     <table id="table">
       <thead>
