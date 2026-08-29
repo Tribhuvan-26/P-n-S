@@ -1,0 +1,6 @@
+data/
+sponsors.xlsx
+~$*.xlsx
+__pycache__/
+*.pyc
+.env

@@ -1,0 +1,6 @@
+requests
+beautifulsoup4
+ddgs
+playwright
+openpyxl
+python-dotenv
