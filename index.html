@@ -43,9 +43,25 @@
   </div>
 
   <script>
+    let allRows = [];
+
     function link(url, label) {
       if (!url) return '<span class="empty">—</span>';
       return `<a href="${url}" target="_blank" rel="noopener">${label || url}</a>`;
+    }
+
+    function render(rows) {
+      const tbody = document.getElementById('rows');
+      tbody.innerHTML = rows.map(r => `
+        <tr>
+          <td>${r['Sponsor Company'] || ''}</td>
+          <td>${r['Email'] || '<span class="empty">—</span>'}</td>
+          <td>${r['Phone'] || '<span class="empty">—</span>'}</td>
+          <td>${link(r['LinkedIn URL'], 'Profile')}</td>
+          <td>${link(r['Source URL'], new URL(r['Source URL'] || 'https://example.com').hostname)}</td>
+          <td>${r['Date Found'] || ''}</td>
+        </tr>
+      `).join('') || `<tr><td colspan="6" class="empty">No rows yet.</td></tr>`;
     }
   </script>
 </body>
