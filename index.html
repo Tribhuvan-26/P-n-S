@@ -41,5 +41,12 @@
       <tbody id="rows"></tbody>
     </table>
   </div>
+
+  <script>
+    function link(url, label) {
+      if (!url) return '<span class="empty">—</span>';
+      return `<a href="${url}" target="_blank" rel="noopener">${label || url}</a>`;
+    }
+  </script>
 </body>
 </html>
