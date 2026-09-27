@@ -1,4 +1,4 @@
-# Sponsor Lead Automation (P&S)
+# Sponsor Lead Automation extraction (P&S)
 
 Finds sponsor companies for E-Summits held in Hyderabad, pulls any publicly
 listed contact info (email, phone, LinkedIn), and saves it to a local Excel
